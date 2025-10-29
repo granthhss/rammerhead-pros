@@ -18,6 +18,11 @@ const setupPipeline = require('./setupPipeline');
 const RammerheadLogging = require('../classes/RammerheadLogging');
 const getSessionId = require('../util/getSessionId');
 
+// 🟢 Koyeb port fix — dynamically set port
+const PORT = process.env.PORT || 8080;
+config.port = PORT;
+config.crossDomainPort = null; // disable secondary port (optional)
+
 const enableWorkers = config.workers && config.workers !== 1;
 const prefix = enableWorkers ? (cluster.isMaster ? '(master) ' : `(${cluster.worker.id}) `) : '';
 
